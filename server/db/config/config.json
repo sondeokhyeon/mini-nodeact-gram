@@ -1,0 +1,38 @@
+{
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "nodearct_gram",
+    "host": "127.0.0.1",
+    "dialect": "mariadb",
+    "timezone" : "Etc/GMT+9",
+    "options": {
+      "define": {
+        "charset": "utf8mb4",
+        "dialectOptions": {
+          "collate": "utf8mb4_general_ci"
+        }
+      },
+      "pool": {
+        "min": 0,
+        "max": 30,
+        "idle": 10000,
+        "acquire": 10000
+      }
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
