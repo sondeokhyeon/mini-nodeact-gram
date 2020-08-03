@@ -20,7 +20,7 @@ const TITLE = styled.h1`
 const Header = () => {
     return (
         <HEAD>
-            <TITLE>★𝗠𝗶𝗻𝘄𝗼𝗼_𝗴𝗿𝗮𝗺★</TITLE>
+            <TITLE>𝗠𝗶𝗻𝘄𝗼𝗼★𝗴𝗿𝗮𝗺</TITLE>
             <FORM />
         </HEAD>        
     )

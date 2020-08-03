@@ -2,13 +2,15 @@ import React, {useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import {useDataDispatch, useDataState, getPhotoList} from '../Others/Store'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const PHOTO_CONTAINER = styled.div`
-    width:100%;
+    width:95%;
+    margin:0 auto;
 
     @media screen and (min-width:1100px) {
-        width:50%;
-        margin:0 auto;
+        width:35%;
     }
     div + div{
             margin-top:35px;
@@ -54,8 +56,16 @@ const Photo = () => {
         <PHOTO_CONTAINER>
             {data.map((photos, index) => 
                 <div key={index} style={{'paddingBottom' : '12px', 'borderBottom' : '1px solid #ccc'}}>
-                    <IMG id={photos.idx} style={{ 'width':'100%' }}  src={photos.filename}></IMG>
-                    <div style={{ 'width':'100%', 'textAlign': 'right'}}><button onClick={() => {photoDelte(photos.idx)}}>삭제</button></div>
+                    <LazyLoadImage 
+                        width='100%'
+                        src={photos.filename}
+                        alt='미누'   
+                        effect="opacity"
+                        delayTime={300} 
+                    />
+                    <div style={{ 'width':'100%', 'textAlign': 'right'}}>
+                        <button onClick={() => {photoDelte(photos.idx)}}>삭제</button>
+                    </div>
                 </div>
             )}
         </PHOTO_CONTAINER>        

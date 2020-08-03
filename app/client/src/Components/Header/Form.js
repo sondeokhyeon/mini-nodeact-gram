@@ -8,13 +8,11 @@ const FORM_CONTAINER = styled.div`
     display:flex;
     justify-content: center;
     align-items: center;
+    width:90vw;
 `;
 
 const UPLOAD_FORM = styled.form`
     margin:20px 0px;
-    & : first-child {
-        margin-left:20px;
-    }
 `;
 
 const SUBMIT_BTN = styled.button`
@@ -24,7 +22,6 @@ const SUBMIT_BTN = styled.button`
     color: white;
     background-color:#2e6da4;
     border-radius:50px;
-    margin-right:20px;
 `;
 
 const filter = [
