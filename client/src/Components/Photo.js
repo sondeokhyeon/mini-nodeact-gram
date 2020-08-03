@@ -5,14 +5,18 @@ import {useDataDispatch, useDataState, getPhotoList} from '../Others/Store'
 
 const PHOTO_CONTAINER = styled.div`
     width:100%;
+
     @media screen and (min-width:1100px) {
         width:50%;
         margin:0 auto;
     }
+    div + div{
+            margin-top:35px;
+    }
 `;
 
 const IMG = styled.img`
-    margin:10px 0px;
+
 `;
 
 const Photo = () => {
@@ -49,9 +53,9 @@ const Photo = () => {
     return (
         <PHOTO_CONTAINER>
             {data.map((photos, index) => 
-                <div key={index}>
+                <div key={index} style={{'paddingBottom' : '12px', 'borderBottom' : '1px solid #ccc'}}>
                     <IMG id={photos.idx} style={{ 'width':'100%' }}  src={photos.filename}></IMG>
-                    <button style={{'float': 'right'}} onClick={() => {photoDelte(photos.idx)}}>삭제</button>
+                    <div style={{ 'width':'100%', 'textAlign': 'right'}}><button onClick={() => {photoDelte(photos.idx)}}>삭제</button></div>
                 </div>
             )}
         </PHOTO_CONTAINER>        

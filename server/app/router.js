@@ -1,12 +1,13 @@
 import express from 'express';
 import { photoUploader } from './config'
-import db from '../db/models';
+import db from '../db/models/index';
 
 const router = express.Router();
 
 router.get('/sync', async (req,res) => {
     try {
-        await models.sequelize.sync()
+        console.log(db)
+        await db.sequelize.sync()
         res.json('싱크가 되었습니다.')
         return;
     } catch(e) {
