@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useDataDispatch, getPhotoList } from '../../Others/Store'
 //import loadImage from 'blueimp-load-image';
+import { base } from '../../Others/Api'
 
 const FORM_CONTAINER = styled.div`
     display:flex;
@@ -70,7 +71,6 @@ const Form = () => {
     const [photo, setPhoto] = useState([]);
     const inputEl = useRef(null);
 
-
     async function  Upload() {
         const {value} = inputEl.current
         if(value === '') {
@@ -90,10 +90,14 @@ const Form = () => {
             formData.append('photo', photo[i])
         }
         
-        await axios.post('/api/upload', formData)
+        const nowYearMonth = new Date();
+        let year = nowYearMonth.getFullYear(); 
+        let month = nowYearMonth.getMonth() + 1 < 10 ? `0${nowYearMonth.getMonth() + 1}` : nowYearMonth.getMonth() + 1
+
+        await axios.post(base + '/api/upload', formData)
                 .then(res => {
                     if(res.data.result === 'success') {
-                        getPhotoList(dispatch);
+                        getPhotoList(dispatch, `${year}-${month}`);
                     } else {
                         alert('오류가 발생했어요...')
                         console.log(res.data)
