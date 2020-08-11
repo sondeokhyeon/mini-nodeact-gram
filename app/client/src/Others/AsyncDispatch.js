@@ -1,8 +1,8 @@
 function AsyncDispatch(PromiseFn) {
-    async function actionHandler(dispatch) {
+    async function actionHandler(dispatch, args) {
         dispatch({type:'LOADING'})
         try {
-            const data = await PromiseFn();
+            const data = await PromiseFn(args);
            dispatch({type: 'SUCCESS', data})
         } catch(err) {
             console.error(err);
