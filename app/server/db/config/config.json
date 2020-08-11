@@ -5,20 +5,17 @@
     "database": "nodearct_gram",
     "host": "db" ,
     "dialect": "mariadb",
-    "timezone" : "Etc/GMT+9",
-    "options": {
-      "define": {
-        "charset": "utf8mb4",
-        "dialectOptions": {
-          "collate": "utf8mb4_general_ci"
-        }
-      },
-      "pool": {
-        "min": 0,
-        "max": 30,
-        "idle": 10000,
-        "acquire": 10000
-      }
+    "timezone" : "+09:00",
+    "dialectOptions": {
+      "collate": "utf8mb4_general_ci",
+      "useUTC" : false,
+      "timezone" : "Etc/GMT+9"
+    },
+    "pool": {
+      "min": 0,
+      "max": 30,
+      "idle": 10000,
+      "acquire": 10000
     }
   },
   "test": {

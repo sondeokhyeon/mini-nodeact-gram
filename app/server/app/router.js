@@ -1,13 +1,12 @@
 import express from 'express';
 import { photoUploader } from './config'
-import db from '../db/models/index';
-
+import {sequelize, Sequelize} from '../db/models/index';
+const {Op} = Sequelize
 const router = express.Router();
 
 router.get('/sync', async (req,res) => {
     try {
-        console.log(db)
-        await db.sequelize.sync()
+        await sequelize.sync()
         res.json('싱크가 되었습니다.')
         return;
     } catch(e) {
@@ -18,11 +17,21 @@ router.get('/sync', async (req,res) => {
 });
 
 router.get('/list', async (req, res) => {
-    const data = await db.sequelize.models.photo.findAll({
-        raw:true,
-        order : [
-            ['createdAt', 'DESC']
-        ]
+    const { query : {date}} = req;
+    // const data = await sequelize.models.photo.findAll({
+    //     raw:true,
+    //     where: {
+    //         createdAt: {
+    //             [Op.like]: date + '%'
+    //         }
+    //     },
+    //     order : [
+    //         ['createdAt', 'DESC']
+    //     ]
+    // })
+    const query = `select * from photos where createdAt like '${date}%' order by createdAt desc  `
+    const data = await sequelize.query(query, {
+        type: sequelize.QueryTypes.SELECT
     })
     res.json(data)
 });
@@ -37,7 +46,7 @@ router.post('/upload', photoUploader.array('photo', 50), async (req,res) => {
     const {files} = req
     try {
         for (let i = 0; i < files.length; i++) {
-            await db.sequelize.models.photo.create({
+            await sequelize.models.photo.create({
                 filename : files[i].filename,
                 ori_filename:files[i].originalname,
             })
@@ -55,7 +64,7 @@ router.post('/upload', photoUploader.array('photo', 50), async (req,res) => {
 router.delete('/:idx', (req,res) => {
     const {idx} = req.params 
     try {
-        db.sequelize.models.photo.destroy({
+        sequelize.models.photo.destroy({
             where: {
                 idx
             } 
