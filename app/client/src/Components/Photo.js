@@ -14,6 +14,8 @@ const PHOTO_CONTAINER = styled.div`
     @media screen and (min-width:1100px) {
         width:35%;
     }
+
+
 `;
 
 const NONE_CONTAINER = styled.div`
@@ -27,11 +29,17 @@ const NONE_CONTAINER = styled.div`
 `;
 
 const DATA_CONTAINER = styled.div`
+    box-sizing:border-box;
+    border: 10px solid white;
+    border-radius:10px;
     & + &{
         margin-top:35px;
     }
     &:nth-child(2) {
         margin-top:15px;
+    }
+    &:last-child {
+        margin-bottom:30px;
     }
 `;
 
@@ -39,6 +47,17 @@ const NOTI = styled.div`
     text-align:center;
     height: 50vh;
     line-height: 50vh;
+`;
+
+const DATA_SUBINFO = styled.div`
+    background-color:white;
+    border:none;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    height:20px;
+    padding-top:10px;
 `;
 
 const Photo = () => {
@@ -98,12 +117,14 @@ const Photo = () => {
     }
 
     const {loading, data, error} = state
-    if(loading) return(<div>       
+    if(loading) return( <div>       
                             <NONE_CONTAINER>
                                 <NOTI style={{'textAlign':'center'}}>Loading...</NOTI>
                             </NONE_CONTAINER>
                         </div>)
+
     if(error) return <div>Error</div>
+
     if(data.length === 0 ) return  (
         <NONE_CONTAINER>
             <DATE_CONTROLLER downDate={downDate} date={date} upDate={upDate}/>
@@ -115,7 +136,7 @@ const Photo = () => {
         <PHOTO_CONTAINER>
             <DATE_CONTROLLER downDate={downDate} date={date} upDate={upDate}/>
             {data.map((photos, index) => 
-                <DATA_CONTAINER key={index} style={{'paddingBottom' : '12px', 'borderBottom' : '1px solid #ccc'}}>
+                <DATA_CONTAINER key={index}>
                     <LazyLoadImage 
                         width='100%'
                         src= {base+'/photo/'+photos.filename}
@@ -123,9 +144,13 @@ const Photo = () => {
                         effect="opacity"
                         delayTime={300} 
                     />
-                    <div style={{ 'width':'100%', 'textAlign': 'right'}}>
-                        <button onClick={() => {photoDelte(photos.idx)}}>삭제</button>
-                    </div>
+                    <DATA_SUBINFO>
+                        <div>업로드 일시 : {photos.createdAt.replace('T', ' ')}</div>
+                        <div>
+                            <button onClick={() => {photoDelte(photos.idx)}}>삭제</button>
+                        </div>
+                    </DATA_SUBINFO>
+          
                 </DATA_CONTAINER>
             )}
         </PHOTO_CONTAINER>        
