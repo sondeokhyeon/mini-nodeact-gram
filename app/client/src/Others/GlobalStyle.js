@@ -3,8 +3,7 @@ import reset from 'styled-reset'
 
 const GlobalStyle = createGlobalStyle`
     body {
-        height:100%;
-        width:100%;
+        background-color: #eee;
     }
     ${reset}
 `;
