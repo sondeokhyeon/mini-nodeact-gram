@@ -28,7 +28,7 @@ const DateController = ({downDate, date, upDate}) => {
     return (
         <BTN_CONTAINER>
             <ACTION_BTN type='l' onClick={() => {downDate()}}>DOWN</ACTION_BTN>
-            {date}
+            {date} 업로드 사진
             <ACTION_BTN type='r' onClick={() => {upDate()}}>UP</ACTION_BTN>
         </BTN_CONTAINER>        
     )
